@@ -1,0 +1,19 @@
+﻿@using News.Repository
+@inject IPageGroupRepository _groupRepository
+
+    <ul>
+        <li><a href=""> صفحه اصلی </a></li>
+        <li>
+            <span>گروه های خبری</span>
+            <ul>
+                @*<li><a href="">اخبار سیاسی</a></li>
+        <li><a href="">اخبار فرهنگی</a></li>
+        <li><a href="">اخبار اقتصادی</a></li>
+        <li><a href="">اخبار اجتماعی</a></li>*@
+                @foreach (var item in _groupRepository.GetAllPageGroups())
+                {
+                    <li><a href="/Group/@item.GroupID/@item.GroupTitle">@item.GroupTitle</a></li>
+                }
+            </ul>
+        </li>
+    </ul>

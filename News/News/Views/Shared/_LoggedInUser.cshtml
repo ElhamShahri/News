@@ -1,0 +1,36 @@
+﻿@*@if (User.Identity.IsAuthenticated)*@
+@using Microsoft.AspNetCore.Identity
+@using News.Data
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+
+    <section class="category-section border-radius">
+        <header><i class="fa fa-folder-open-o"></i> <h3>@User.Identity.Name خوش آمدید</h3></header>
+        <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Index", new { area = "" })" method="post" id="logoutForm">
+            <ul>
+                <li><a asp-area="Admin" asp-controller="PageGroups" asp-action="Index">مدیریت گروه ها</a></li>
+                <li><a asp-area="Admin" asp-controller="Pages" asp-action="Index"> مدیریت خبرها </a></li>
+                <li><a asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Index", new { area = "" })" id="logoutForm">خروج از حساب کاربری</a></li>
+                <li> <button type="submit">Logout</button></li>
+               
+            </ul>
+            </form>
+    </section>
+}
+else
+{
+
+    <section class="category-section border-radius">
+        <header><i class="fa fa-user"></i> <h3>کاربر مهمان خوش آمدید!</h3></header>
+        <ul>
+            <li><a asp-action="Login" asp-controller="Account" asp-area="Identity"> ورود به سایت </a></li>
+            <li><a asp-action="Register" asp-controller="Account" asp-area="Identity" > ثبت نام </a></li>
+
+        </ul>
+    </section>
+
+}
